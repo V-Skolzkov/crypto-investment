@@ -1,0 +1,5 @@
+src/main/resources/prices/BTC_values.csv
+src/main/resources/prices/DOGE_values.csv
+src/main/resources/prices/ETH_values.csv
+src/main/resources/prices/LTC_values.csv
+src/main/resources/prices/XRP_values.csv
