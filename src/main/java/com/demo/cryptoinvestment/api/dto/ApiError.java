@@ -13,9 +13,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 public class ApiError {
 
-    @JsonProperty("message")
-    String message;
+    @JsonProperty("error_message")
+    String errorMessage;
 
-    @JsonProperty("code")
-    String code;
+    @JsonProperty("error_code")
+    String errorCode;
 }

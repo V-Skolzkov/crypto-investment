@@ -35,12 +35,6 @@ public class CryptoInvestmentServiceImpl implements CryptoInvestmentService {
 
         return cacheService.getCryptoCurrencyByMetric(symbol.toUpperCase(), metric);
 
-//        return switch (metric) {
-//            case min -> repository.getMin(symbol.toUpperCase()).get(0);
-//            case max -> repository.getMax(symbol.toUpperCase()).get(0);
-//            case newest -> repository.getNewest(symbol.toUpperCase()).get(0);
-//            case oldest -> repository.getOldest(symbol.toUpperCase()).get(0);
-//        };
     }
 
     @Override

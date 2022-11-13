@@ -49,6 +49,6 @@ public class CryptoInvestmentControllerAdvice {
     private ApiError processException(CryptoInvestmentException exception) {
 
         LOG.error(exception.getMessage());
-        return ApiError.builder().message(exception.getMessage()).build();
+        return ApiError.builder().errorMessage(exception.getMessage()).build();
     }
 }
