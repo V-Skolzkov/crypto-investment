@@ -27,7 +27,7 @@ public interface CryptoCurrencyRepository extends JpaRepository<CryptoCurrencyEn
             "(select min(t.timestamp) from CryptoCurrencyEntity t where t.symbol = :symbol)")
     List<CryptoCurrencyEntity> getOldest(@Param("symbol") String symbol);
 
-    @Query(value = "select max(id) as id, max(time_stamp) as time_stamp, symbol, (max(p.price)-min(p.price))/min(p.price) as price " +
+    @Query(value = "select max(id) as id, null as time_stamp, symbol, (max(p.price)-min(p.price))/min(p.price) as price " +
             "from t_crypto_currency p where p.time_stamp >= :from and p.time_stamp < :to group by p.symbol", nativeQuery = true)
     List<CryptoCurrencyEntity> getNormalisedRange(@Param("from") Long from, @Param("to") Long to);
 }

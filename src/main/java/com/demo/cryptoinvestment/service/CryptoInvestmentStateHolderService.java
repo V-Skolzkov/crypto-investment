@@ -12,4 +12,6 @@ public interface CryptoInvestmentStateHolderService {
 
     void setServiceReadiness(boolean ready);
 
+    Set<String> getCurrencies();
+
 }

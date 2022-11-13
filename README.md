@@ -29,3 +29,5 @@ Sample API call:
 http://localhost:8080/v1/cryptoinvestment/currency/btc/metric/max
 
 http://localhost:8080/v1/cryptoinvestment/normalized/range/2022-01-01/max
+
+http://localhost:8080/v1/cryptoinvestment/normalized/range

@@ -5,11 +5,11 @@ import com.demo.cryptoinvestment.domain.entity.CryptoCurrencyEntity;
 
 import java.util.TreeSet;
 
-public interface CryptoInvestmentService {
+public interface CacheService {
+
+    void precalculate();
 
     CryptoCurrencyEntity getCryptoCurrencyByMetric(String symbol, Metric metric);
-
-    CryptoCurrencyEntity getCryptoCurrencyWithHighNormalizedRange(String date);
 
     TreeSet<CryptoCurrencyEntity> getSortedCryptoCurrencyByNormalizedRange();
 }

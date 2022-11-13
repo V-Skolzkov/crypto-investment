@@ -1,6 +1,6 @@
 package com.demo.cryptoinvestment.api;
 
-import com.demo.cryptoinvestment.api.dto.Metric;
+import com.demo.cryptoinvestment.common.Metric;
 import com.demo.cryptoinvestment.api.dto.response.CryptoCurrencyResponse;
 import com.demo.cryptoinvestment.domain.entity.CryptoCurrencyEntity;
 import com.demo.cryptoinvestment.service.CryptoInvestmentService;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Pattern;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Tag(name = "Public API", description = "Crypto Investment API")
 @RestController
@@ -51,5 +53,19 @@ public class CryptoInvestmentController {
         CryptoCurrencyResponse response = new CryptoCurrencyResponse();
         return ResponseEntity.status(HttpStatus.OK)
                 .body(response.fromDomain(currencyEntity));
+    }
+
+    @RequestMapping(
+            method = {RequestMethod.GET},
+            value = {"/normalized/range"},
+            produces = {"application/json"}
+    )
+    ResponseEntity<List<CryptoCurrencyResponse>> getSortedCryptoCurrencyByNormalizedRange() {
+
+        TreeSet<CryptoCurrencyEntity> currencyEntities = investmentService.getSortedCryptoCurrencyByNormalizedRange();
+
+        List<CryptoCurrencyResponse> result = currencyEntities.stream().map(e -> new CryptoCurrencyResponse().fromDomain(e)).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(result);
     }
 }

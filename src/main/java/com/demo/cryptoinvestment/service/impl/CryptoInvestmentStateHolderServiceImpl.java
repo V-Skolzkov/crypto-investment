@@ -34,4 +34,9 @@ public class CryptoInvestmentStateHolderServiceImpl implements CryptoInvestmentS
     public void setServiceReadiness(boolean ready) {
         SERVICE_READY.set(ready);
     }
+
+    @Override
+    public Set<String> getCurrencies() {
+        return CURRENCIES;
+    }
 }

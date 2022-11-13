@@ -1,6 +1,7 @@
 package com.demo.cryptoinvestment.service.impl;
 
 import com.demo.cryptoinvestment.repository.CryptoCurrencyRepository;
+import com.demo.cryptoinvestment.service.CacheService;
 import com.demo.cryptoinvestment.service.CryptoInvestmentStateHolderService;
 import com.demo.cryptoinvestment.service.CryptoLoadService;
 import com.demo.cryptoinvestment.service.Reader;
@@ -25,16 +26,15 @@ import java.util.stream.Collectors;
 @Slf4j
 public class CryptoLoadServiceImpl implements CryptoLoadService {
     private final ExecutorService loadExecutorService = Executors.newFixedThreadPool(5);
-
     private final CryptoCurrencyRepository repository;
     private final CryptoInvestmentStateHolderService stateHolderService;
+    private final CacheService cacheService;
     private final ApplicationArguments args;
 
     public void load() {
 
         try {
             LOG.info("Loading data ...");
-
             Path path = Paths.get(args.getNonOptionArgs().get(0));
             List<String> data = Files.readAllLines(path);
 
@@ -49,10 +49,12 @@ public class CryptoLoadServiceImpl implements CryptoLoadService {
             while (!loadExecutorService.isTerminated()) {
                 TimeUnit.SECONDS.sleep(1);
             }
-
-            stateHolderService.setServiceReadiness(true);
-
             LOG.info("Loading data ... done.");
+
+            LOG.info("Precalculate ...");
+            cacheService.precalculate();
+            LOG.info("Precalculate ... done.");
+            stateHolderService.setServiceReadiness(true);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
