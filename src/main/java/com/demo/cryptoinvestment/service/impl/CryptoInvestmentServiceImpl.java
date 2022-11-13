@@ -30,7 +30,7 @@ public class CryptoInvestmentServiceImpl implements CryptoInvestmentService {
         serviceReadinessCheck();
 
         if (!stateHolderService.isSupportedCurrency(symbol.toUpperCase())) {
-            throw new BadRequestException(String.format("Currency %s nor supported!", symbol));
+            throw new BadRequestException(String.format("Currency %s not supported!", symbol));
         }
 
         return cacheService.getCryptoCurrencyByMetric(symbol.toUpperCase(), metric);

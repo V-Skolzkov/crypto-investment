@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.*;
 
 import static com.demo.cryptoinvestment.common.Metric.*;
@@ -24,7 +23,7 @@ public class CacheServiceImp implements CacheService {
     private final CryptoInvestmentStateHolderService stateHolderService;
 
     private Map<String, Map<Metric, CryptoCurrencyEntity>> currencyMap = new HashMap<>();
-    //    private TreeSet<CryptoCurrencyEntity> sortedCurrency = new TreeSet<>(Comparator.comparing(CryptoCurrencyEntity::getPrice));
+
     private TreeSet<CryptoCurrencyEntity> sortedCurrency = new TreeSet<>(Comparator.comparing(CryptoCurrencyEntity::getPrice,
             (e1, e2) -> e1.compareTo(e2) == 0 ? 0 : e1.compareTo(e2) > 0 ? -1 : 1));
 
